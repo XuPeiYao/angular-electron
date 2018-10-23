@@ -7,7 +7,6 @@ const args = process.argv.slice(1);
 serve = args.some(val => val === '--serve');
 
 function createWindow() {
-
   const electronScreen = screen;
   const size = electronScreen.getPrimaryDisplay().workAreaSize;
 
@@ -15,8 +14,9 @@ function createWindow() {
   win = new BrowserWindow({
     x: 0,
     y: 0,
-    width: size.width,
-    height: size.height
+    width: 800,
+    height: 600,
+    frame: false
   });
 
   if (serve) {
@@ -25,11 +25,13 @@ function createWindow() {
     });
     win.loadURL('http://localhost:4200');
   } else {
-    win.loadURL(url.format({
-      pathname: path.join(__dirname, 'dist/index.html'),
-      protocol: 'file:',
-      slashes: true
-    }));
+    win.loadURL(
+      url.format({
+        pathname: path.join(__dirname, 'dist/index.html'),
+        protocol: 'file:',
+        slashes: true
+      })
+    );
   }
 
   win.webContents.openDevTools();
@@ -41,11 +43,9 @@ function createWindow() {
     // when you should delete the corresponding element.
     win = null;
   });
-
 }
 
 try {
-
   // This method will be called when Electron has finished
   // initialization and is ready to create browser windows.
   // Some APIs can only be used after this event occurs.
@@ -67,7 +67,6 @@ try {
       createWindow();
     }
   });
-
 } catch (e) {
   // Catch Error
   // throw e;

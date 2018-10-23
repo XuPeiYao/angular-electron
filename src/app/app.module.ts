@@ -19,6 +19,7 @@ import { WebviewDirective } from './directives/webview.directive';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
+import { YoutubePlayerModule } from './youtube-player/youtube-player.module';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -26,20 +27,17 @@ export function HttpLoaderFactory(http: HttpClient) {
 }
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HomeComponent,
-    WebviewDirective
-  ],
+  declarations: [AppComponent, HomeComponent, WebviewDirective],
   imports: [
     BrowserModule,
     FormsModule,
     HttpClientModule,
     AppRoutingModule,
+    YoutubePlayerModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
-        useFactory: (HttpLoaderFactory),
+        useFactory: HttpLoaderFactory,
         deps: [HttpClient]
       }
     })
@@ -47,4 +45,4 @@ export function HttpLoaderFactory(http: HttpClient) {
   providers: [ElectronService],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}
